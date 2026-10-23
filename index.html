@@ -126,11 +126,11 @@ const PERIODE = "Période en cours · P12";
    detail → texte complémentaire sous la valeur
 ----------------------------------------------------------------- */
 const KPI_DATA = [
-  { label: "CA de la période",       valeur: "1,06 M€", evol: 6.0,  detail: "vs N-1" },
-  { label: "CA cumulé",              valeur: "16,7 M€", evol: 6.1,  detail: "12 périodes glissantes" },
+  { label: "CA de la période",       valeur: "7,6 M€", evol: 6.0,  detail: "vs N-1" },
+  { label: "CA cumulé",              valeur: "120,1 M€", evol: 6.1,  detail: "12 périodes glissantes" },
   { label: "Marge brute",            valeur: "34,8 %",  evol: null, detail: "+0,9 pt vs N-1" },
-  { label: "Commandes de la période",valeur: "442",     evol: 4.2,  detail: "vs N-1" },
-  { label: "Clients actifs",         valeur: "412",     evol: 2.5,  detail: "vs N-1" },
+  { label: "Commandes de la période",valeur: "3 180",     evol: 4.2,  detail: "vs N-1" },
+  { label: "Clients actifs",         valeur: "1 860",     evol: 2.5,  detail: "vs N-1" },
 ];
 
 /* ---- CA PAR PÉRIODE (k€) : N et N-1, 12 valeurs chacune --------- */
@@ -138,8 +138,8 @@ const EVOLUTION = {
   titre: "CA par période",
   sousTitre: "N comparé à N-1, en k€",
   periodes: ["P1","P2","P3","P4","P5","P6","P7","P8","P9","P10","P11","P12"],
-  N:   [1120, 1180, 1350, 1520, 1690, 1610, 1480, 1240, 1450, 1560, 1420, 1060],
-  N_1: [1060, 1110, 1270, 1430, 1590, 1520, 1400, 1170, 1360, 1470, 1340, 1000],
+  N:   [8060, 8500, 9720, 10940, 12170, 11590, 10660, 8930, 10440, 11230, 10220, 7630],
+  N_1: [7630, 7990, 9140, 10300, 11450, 10940, 10080, 8420, 9790, 10580, 9650, 7200],
 };
 
 /* ---- CA PAR FAMILLE (% du CA cumulé, total ≈ 100) --------------- */
@@ -154,27 +154,27 @@ const FAMILLES = [
 
 /* ---- CA PAR SECTEUR GÉOGRAPHIQUE (k€ cumulés) ------------------- */
 const SECTEURS = [
-  { nom: "Bretagne",           ca: 5840 },
-  { nom: "Pays de la Loire",   ca: 3170 },
-  { nom: "Normandie",          ca: 2170 },
-  { nom: "Île-de-France",      ca: 1830 },
-  { nom: "Nouvelle-Aquitaine", ca: 1500 },
-  { nom: "Export",             ca: 1340 },
-  { nom: "Autres régions",     ca: 830  },
+  { nom: "Bretagne",           ca: 42050 },
+  { nom: "Pays de la Loire",   ca: 22820 },
+  { nom: "Normandie",          ca: 15620 },
+  { nom: "Île-de-France",      ca: 13180 },
+  { nom: "Nouvelle-Aquitaine", ca: 10800 },
+  { nom: "Export",             ca: 9650 },
+  { nom: "Autres régions",     ca: 5970  },
 ];
 
 /* ---- TOP 10 CLIENTS (k€ cumulés, évolution % vs N-1) ------------ */
 const TOP_CLIENTS = [
-  { nom: "BRICOMAX centrale",  type: "GSB",          ca: 2340, evol: 8  },
-  { nom: "JARDIBRICO",         type: "GSB",          ca: 1860, evol: 3  },
-  { nom: "BATIMAN",            type: "Négoce",       ca: 1410, evol: 11 },
-  { nom: "BRICO OUEST",        type: "GSB",          ca: 1120, evol: -2 },
-  { nom: "NÉGOCE ATLANTIQUE",  type: "Négoce",       ca: 980,  evol: 6  },
-  { nom: "DISTRIMAT 35",       type: "Négoce",       ca: 760,  evol: 14 },
-  { nom: "CLÔTURES SERVICES",  type: "Installateur", ca: 640,  evol: 9  },
-  { nom: "HOME BUILD UK",      type: "Export",       ca: 520,  evol: 21 },
-  { nom: "BRICOLAND",          type: "GSB",          ca: 470,  evol: -5 },
-  { nom: "ART'MÉTAL POSE",     type: "Installateur", ca: 390,  evol: 4  },
+  { nom: "BRICOMAX centrale",  type: "GSB",          ca: 16850, evol: 8  },
+  { nom: "JARDIBRICO",         type: "GSB",          ca: 13390, evol: 3  },
+  { nom: "BATIMAN",            type: "Négoce",       ca: 10150, evol: 11 },
+  { nom: "BRICO OUEST",        type: "GSB",          ca: 8060, evol: -2 },
+  { nom: "NÉGOCE ATLANTIQUE",  type: "Négoce",       ca: 7060,  evol: 6  },
+  { nom: "DISTRIMAT 35",       type: "Négoce",       ca: 5470,  evol: 14 },
+  { nom: "CLÔTURES SERVICES",  type: "Installateur", ca: 4610,  evol: 9  },
+  { nom: "HOME BUILD UK",      type: "Export",       ca: 3740,  evol: 21 },
+  { nom: "BRICOLAND",          type: "GSB",          ca: 3380,  evol: -5 },
+  { nom: "ART'MÉTAL POSE",     type: "Installateur", ca: 2810,  evol: 4  },
 ];
 
 /* ================================================================
@@ -194,7 +194,7 @@ const esc = s => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;");
 
 function niceMax(v) {
   const p = Math.pow(10, Math.floor(Math.log10(v))), m = v / p;
-  return (m <= 1 ? 1 : m <= 2 ? 2 : m <= 2.5 ? 2.5 : m <= 5 ? 5 : 10) * p;
+  return (m <= 1 ? 1 : m <= 1.5 ? 1.5 : m <= 2 ? 2 : m <= 2.5 ? 2.5 : m <= 5 ? 5 : 10) * p;
 }
 
 /* Barres verticales groupées (SVG) */
